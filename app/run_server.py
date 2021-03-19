@@ -1,11 +1,3 @@
-# USAGE
-# Start the server:
-# 	python run_front_server.py
-# Submit a request via Python:
-# 	python simple_request.py
-
-
-# import the necessary packages
 import dill
 import pandas as pd
 import os
@@ -16,7 +8,6 @@ from time import strftime
 
 
 dill._dill._reverse_typemap['ClassType'] = type
-
 
 # initialize our Flask application and the model
 app = flask.Flask(__name__)
@@ -66,21 +57,9 @@ def predict():
             else:
                 feats[feat] = [0]
 
-        # description, company_profile, benefits = "", "", ""
-
-        # if request_json["description"]:
-        #     description = request_json['description']
-        #
-        # if request_json["company_profile"]:
-        #     company_profile = request_json['company_profile']
-        #
-        # if request_json["benefits"]:
-        #     benefits = request_json['benefits']
-
         # logger.info(f'{dt} Data: description={description}, company_profile={company_profile}, benefits={benefits}')
+
         try:
-            print(feats)
-            # print(pd.DataFrame(feats))
             preds = model.predict_proba(pd.DataFrame(feats))
         except AttributeError as e:
             logger.warning(f'{dt} Exception: {str(e)}')
